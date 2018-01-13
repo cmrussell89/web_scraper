@@ -1,0 +1,60 @@
+{% extends "bootstrap/base.html" %}
+{% block head %}
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="static/custom.css">
+<title>{% block title %}Supplement App v1.5{% endblock %} | Powered by rattleGear</title>
+{% endblock %}
+{% block content %}
+<center>
+    <div col-12 class="wrap">
+        <div class="search">
+            <form method="POST" action="/">
+                {{ form.csrf_token }}
+                {{ form.searchFor(class_="searchTerm") }}
+                {{ form.orderBy }}
+                <button type="submit" class="searchButton">
+                    <i class="icon-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+<div class="infoTable">
+        <div>
+            <table>
+                {% for item in search_results %}
+                    <tr>
+                        <td>{{ item[0] }}</td>
+                        <td>{{ item[1] }}</td>
+                        <td>${{ item[2] }}</td>
+                        <td>{{ item[3] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div>
+            <table>
+                {% for row in products %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td> {{ row[1] }}</td>
+                        <td> ${{ row[2] }}</td>
+                        <td> {{ row[3] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div>
+            <table>
+                {% for row in sorted_products %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>${{ row[2] }}</td>
+                        <td>{{ row[3] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+</div>
+</center>
+{% endblock %}
